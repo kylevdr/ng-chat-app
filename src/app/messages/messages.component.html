@@ -1,3 +1,7 @@
-<p>
-  messages works!
-</p>
+<h2>Messages</h2>
+<ul>
+  <li *ngFor="let message of messages">
+    <p>Author: {{ message.author }}</p>
+    <p>Content: {{ message.content }}</p>
+  </li>
+</ul>
