@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 
 import { Message } from '../message'
-import { MESSAGES } from './mock-messages'
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-messages',
@@ -9,11 +9,16 @@ import { MESSAGES } from './mock-messages'
   styleUrls: ['./messages.component.styl']
 })
 export class MessagesComponent implements OnInit {
-  messages = MESSAGES
+  messages: Message[]
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
+    this.getMessages()
+  }
+
+  getMessages(): void {
+    this.messages = this.messageService.getMessages()
   }
 
 }
