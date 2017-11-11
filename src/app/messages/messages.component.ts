@@ -6,7 +6,7 @@ import { MessageService } from '../message.service';
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.styl']
+  styleUrls: ['./messages.component.sass']
 })
 export class MessagesComponent implements OnInit {
   messages: Message[]
@@ -18,7 +18,9 @@ export class MessagesComponent implements OnInit {
   }
 
   getMessages(): void {
-    this.messages = this.messageService.getMessages()
+    this.messageService.getMessages().subscribe(messages => {
+      this.messages = messages
+    })
   }
 
 }

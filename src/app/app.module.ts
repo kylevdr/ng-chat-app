@@ -6,18 +6,21 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component'
 import { MessageService } from './message.service';
+import { LogsComponent } from './logs/logs.component';
+import { LoggerService } from './logger.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MessagesComponent
+    MessagesComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, LoggerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
