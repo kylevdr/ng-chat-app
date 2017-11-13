@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core'
 })
 export class AppComponent {
   title = 'ng-chat-app'
+
+  constructor(
+    private location: Location
+  ) {}
+
+  goBack() {
+    this.location.back()
+  }
 }

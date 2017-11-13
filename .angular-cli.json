@@ -54,7 +54,25 @@
     }
   },
   "defaults": {
-    "styleExt": "styl",
-    "component": {}
+    "lintFix": true,
+    "styleExt": "sass",
+    "class": {
+      "spec": false
+    },
+    "component": {
+      "spec": false
+    },
+    "directive": {
+      "spec": false
+    },
+    "module": {
+      "spec": false
+    },
+    "pipe": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
+    }
   }
 }

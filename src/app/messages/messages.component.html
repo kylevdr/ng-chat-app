@@ -1,7 +1,7 @@
 <h2>Messages</h2>
-<ul>
-  <li *ngFor="let message of messages">
-    <p>Author: {{ message.author }}</p>
-    <p>Content: {{ message.content }}</p>
-  </li>
-</ul>
+<hr />
+<div *ngFor="let message of messages">
+  <p>Author: {{ message.author }}</p>
+  <p>Content: <a routerLink="/message/{{message.id}}">{{ message.content }}</a></p>
+  <hr />
+</div>

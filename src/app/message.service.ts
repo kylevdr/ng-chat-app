@@ -12,7 +12,12 @@ export class MessageService {
   constructor(private loggerService: LoggerService) { }
 
   getMessages(): Observable<Message[]> {
-    this.loggerService.add('MessageService: fetched message')
+    this.loggerService.add('MessageService: fetched messages')
     return of(MESSAGES)
+  }
+
+  getMessage(id: number): Observable<Message> {
+    this.loggerService.add(`MessageService: fetched message with id: ${id}`)
+    return of(MESSAGES.find(message => message.id === id))
   }
 }
