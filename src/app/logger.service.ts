@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class LoggerService {
+export class Logger {
   logs: string[] = []
 
   add(log: string) {

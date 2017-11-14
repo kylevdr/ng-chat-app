@@ -1,6 +1,6 @@
 <section>
   <h2>Logs</h2>
-  <div *ngFor="let log of loggerService.logs"> {{ log }} </div>
-  <div *ngIf="!loggerService.logs.length"> No logs to display </div>
-  <button (click)="loggerService.clear()">Clear</button>
+  <div *ngFor="let log of logger.logs"> {{ log }} </div>
+  <div *ngIf="!logger.logs.length"> No logs to display </div>
+  <button (click)="logger.clear()">Clear</button>
 </section>

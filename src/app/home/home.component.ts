@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 
-import { LoggerService } from '../logger.service'
+import { Logger } from '../logger.service'
 
 @Component({
   selector: 'app-home',
@@ -10,11 +10,11 @@ import { LoggerService } from '../logger.service'
 export class HomeComponent implements OnInit {
 
   constructor(
-    private loggerService: LoggerService,
+    private logger: Logger,
   ) { }
 
   ngOnInit() {
-    this.loggerService.add('HomeComponent: visited home page')
+    this.logger.add('HomeComponent: visited home page')
   }
 
 }
