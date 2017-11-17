@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Rx'
+import { catchError, map, tap } from 'rxjs/operators'
 import { of } from 'rxjs/observable/of'
-import 'rxjs/add/operator/map'
 
-import { Message } from './message';
-import { Logger } from './logger.service';
-import { environment } from '../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { Message } from './message'
+import { Logger } from './logger.service'
+import { environment } from '../environments/environment'
+import { HttpClient } from '@angular/common/http'
 
 interface IMessagesResponse {
   messages: Message[]
@@ -31,14 +31,28 @@ export class MessageService {
   }
 
   getMessages(): Observable<Message[]> {
-    this.log('fetched messages')
     return this.http.get<IMessagesResponse>(this.messagesUrl)
-      .map(response => response.messages)
+      .pipe(
+        tap(messages => this.log('fetched messages')),
+        map(response => response.messages),
+        catchError(this.handleError('getMessages', []))
+      )
   }
 
   getMessage(id: number): Observable<Message> {
-    this.log(`fetched message with id: ${id}`)
     return this.http.get<IMessageResponse>(environment.API_ENDPOINT + '/messages/' + id)
-      .map(response => response.message)
+      .pipe(
+        tap(_ => this.log(`fetched message with id: ${id}`)),
+        map(response => response.message),
+        catchError(this.handleError<Message>(`getMessage id=${id}`))
+      )
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (err: any): Observable<T> => {
+      console.error(err)
+      this.log(`${operation} failed: ${err.message}`)
+      return of(result as T)
+    }
   }
 }
