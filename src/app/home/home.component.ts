@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.logger.add('HomeComponent: visited home page')
+    this.logger.add('HomeComponent: Visited home page')
   }
 
 }

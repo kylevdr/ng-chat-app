@@ -33,7 +33,7 @@ export class MessageService {
   getMessages(): Observable<Message[]> {
     return this.http.get<IMessagesResponse>(this.messagesUrl)
       .pipe(
-        tap(messages => this.log('fetched messages')),
+        tap(messages => this.log('Fetched messages')),
         map(response => response.messages),
         catchError(this.handleError('getMessages', []))
       )
@@ -42,7 +42,7 @@ export class MessageService {
   getMessage(id: number): Observable<Message> {
     return this.http.get<IMessageResponse>(environment.API_ENDPOINT + '/messages/' + id)
       .pipe(
-        tap(_ => this.log(`fetched message with id: ${id}`)),
+        tap(_ => this.log(`Fetched message with id: ${id}`)),
         map(response => response.message),
         catchError(this.handleError<Message>(`getMessage id=${id}`))
       )

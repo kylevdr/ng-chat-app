@@ -11,6 +11,8 @@ import { LogsComponent } from './logs/logs.component'
 import { Logger } from './logger.service'
 import { HomeComponent } from './home/home.component'
 import { MessageDetailComponent } from './message-detail/message-detail.component'
+import { SocketService } from './socket.service'
+import { ChatComponent } from './chat/chat.component'
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { MessageDetailComponent } from './message-detail/message-detail.componen
     LogsComponent,
     HomeComponent,
     MessageDetailComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import { MessageDetailComponent } from './message-detail/message-detail.componen
     FormsModule,
     HttpClientModule
   ],
-  providers: [MessageService, Logger],
+  providers: [MessageService, SocketService, Logger],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

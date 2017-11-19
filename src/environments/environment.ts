@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  API_ENDPOINT: 'http://localhost:3000'
+  SOCKET_ENDPOINT: 'http://localhost:3000/cable',
+  API_ENDPOINT: 'http://localhost:3000/api'
 }
