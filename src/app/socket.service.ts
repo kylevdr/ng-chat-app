@@ -2,19 +2,35 @@ import { Injectable } from '@angular/core'
 import ActionCable from 'actioncable'
 import { environment } from '../environments/environment'
 import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject'
 
 import { Logger } from './logger.service'
 
 @Injectable()
 export class SocketService {
-  private socket
+  private cable
   private chatChannel
+  private subject
 
   constructor(private logger: Logger) {
-    this.socket = ActionCable.createConsumer(environment.SOCKET_ENDPOINT)
-    this.chatChannel = this.socket.subscriptions.create('ChatChannel', {
+    this.subject = new Subject()
+  }
+  
+  initCable() {
+    this.cable = ActionCable.createConsumer(environment.SOCKET_ENDPOINT)
+  }
+  
+  initChatChannel() {
+    if (!this.cable) {
+      this.initCable()
+    }
+    this.chatChannel = this.cable.subscriptions.create('ChatChannel', {
       connected: () => {
         this.log('Connected to websocket')
+      },
+      received: (data) => {
+        this.log('Received data from socket')
+        this.subject.next(data)
       },
       speak: function (message) {
         this.perform('speak', { message })
@@ -23,14 +39,10 @@ export class SocketService {
   }
   
   listen(): Observable<any> {
-    return new Observable(observer => {
-      if (this.chatChannel) {
-        this.chatChannel.received = (data) => {
-          observer.next(data)
-          this.log('Received data from websocket')
-        }
-      }
-    })
+    if (!this.chatChannel) {
+      this.initChatChannel()
+    }
+    return this.subject.asObservable()
   }
 
   speak(message) {

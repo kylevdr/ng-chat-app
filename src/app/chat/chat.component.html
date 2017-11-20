@@ -1,6 +1,6 @@
 <h2>Chat</h2>
 <p>Chat in real time!</p>
-<form #messageForm="ngForm" (submit)="speak()">
+<form #messageForm="ngForm" (ngSubmit)="speak()">
   <label>Name: <input [(ngModel)]="newMessage.author" name="author" /></label>
   <label>Message: <input [(ngModel)]="newMessage.content" name="content" /></label>
   <button>Speak!</button>
