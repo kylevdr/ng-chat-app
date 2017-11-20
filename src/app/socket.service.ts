@@ -16,8 +16,8 @@ export class SocketService {
       connected: () => {
         this.log('Connected to websocket')
       },
-      speak: function (author, content) {
-        this.perform('speak', {author, content})
+      speak: function (message) {
+        this.perform('speak', { message })
       }
     })
   }
@@ -33,9 +33,9 @@ export class SocketService {
     })
   }
 
-  speak(author: string, content: string) {
+  speak(message) {
     if (this.chatChannel) {
-      this.chatChannel.speak(author, content)
+      this.chatChannel.speak(message)
     }
   }
 

@@ -11,6 +11,10 @@ export class ChatComponent implements OnInit {
   messages = []
   author: string
   content: string
+  newMessage = {
+    author: '',
+    content: ''
+  }
 
   constructor(private socketService: SocketService) { }
 
@@ -22,8 +26,8 @@ export class ChatComponent implements OnInit {
   }
 
   speak(): void {
-    this.socketService.speak(this.author, this.content)
-    this.content = ''
+    this.socketService.speak(this.newMessage)
+    this.newMessage.content = ''
   }
 
 }
